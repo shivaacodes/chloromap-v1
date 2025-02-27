@@ -2,18 +2,44 @@
 
 import { useState } from "react";
 import Image from "next/image";
+import axios from "axios";
 import { Card, CardContent } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 
 export default function AnalyzeSection() {
   const [selectedImage, setSelectedImage] = useState(null);
+  const [result, setResult] = useState(null); // Store backend response
 
+  // Handle file selection
   const handleImageUpload = (event) => {
     const file = event.target.files[0];
     if (file) {
       const reader = new FileReader();
-      reader.onload = (e) => setSelectedImage(e.target.result);
+      reader.onload = (e) =>
+        setSelectedImage({ file, preview: e.target.result });
       reader.readAsDataURL(file);
+    }
+  };
+
+  // Send image to backend
+  const handleAnalyze = async () => {
+    if (!selectedImage?.file) return;
+
+    const formData = new FormData();
+    formData.append("file", selectedImage.file);
+
+    try {
+      const response = await axios.post(
+        "http://localhost:5000/api/process-image",
+        formData,
+        {
+          headers: { "Content-Type": "multipart/form-data" },
+        }
+      );
+      setResult(response.data);
+    } catch (error) {
+      console.error("Analysis failed:", error);
+      setResult({ error: "Failed to process image" });
     }
   };
 
@@ -32,18 +58,26 @@ export default function AnalyzeSection() {
                 <div className="w-full">
                   <div className="relative h-60 w-full rounded-xl overflow-hidden mb-4">
                     <Image
-                      src={selectedImage}
+                      src={selectedImage.preview}
                       alt="Selected plant"
                       fill
                       style={{ objectFit: "cover" }}
                     />
                   </div>
-                  <Button
-                    className="w-full bg-green-400 hover:bg-green-700 text-white mt-2 rounded-xl"
-                    onClick={() => setSelectedImage(null)}
-                  >
-                    Change Image
-                  </Button>
+                  <div className="flex gap-2">
+                    <Button
+                      className="w-full bg-green-400 hover:bg-green-700 text-white mt-2 rounded-xl"
+                      onClick={() => setSelectedImage(null)}
+                    >
+                      Change Image
+                    </Button>
+                    <Button
+                      className="w-full bg-green-600 hover:bg-green-800 text-white mt-2 rounded-xl"
+                      onClick={handleAnalyze}
+                    >
+                      Analyze
+                    </Button>
+                  </div>
                 </div>
               ) : (
                 <>
@@ -92,9 +126,30 @@ export default function AnalyzeSection() {
               <h3 className="text-lg font-medium text-gray-700 mb-4">
                 Analysis Result
               </h3>
-              <p className="text-gray-400 text-sm">
-                Upload an image to analyze
-              </p>
+              {result ? (
+                result.error ? (
+                  <p className="text-red-500 text-sm">{result.error}</p>
+                ) : (
+                  <div>
+                    <div className="relative h-60 w-full rounded-xl overflow-hidden mb-4">
+                      <Image
+                        src={`http://localhost:5000/api/processed/${result.result.processed_file}`}
+                        alt="Processed plant"
+                        fill
+                        style={{ objectFit: "cover" }}
+                      />
+                    </div>
+                    <p className="text-gray-600 text-sm">
+                      Width: {result.result.width}px, Height:{" "}
+                      {result.result.height}px
+                    </p>
+                  </div>
+                )
+              ) : (
+                <p className="text-gray-400 text-sm">
+                  Upload an image to analyze
+                </p>
+              )}
             </CardContent>
           </Card>
         </div>
