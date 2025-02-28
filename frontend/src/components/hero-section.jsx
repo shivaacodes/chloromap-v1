@@ -2,17 +2,27 @@ import Header from "@/components/header";
 
 export default function HeroSection() {
   return (
-    <section className="min-h-screen flex items-center justify-center bg-green-50 bg-cover bg-center relative px-6">
-      {/* Tile background behind everything */}
-      <div
-        className="absolute inset-0 z-0 opacity-40"
-        style={{
-          backgroundImage: "url('/images/3px-tile.png')",
-          backgroundRepeat: "repeat",
-        }}
-      ></div>
+    <section className="min-h-screen flex items-center justify-center bg-white bg-cover bg-center relative px-6">
+      {/* Tile Background with Fading Effect */}
+      <div className="absolute inset-0 z-0">
+        <div
+          className="w-full h-full"
+          style={{
+            backgroundImage: "url('/images/3px-tile.png')",
+            backgroundRepeat: "repeat",
+            opacity: "0.2",
+          }}
+        ></div>
+        <div
+          className="absolute inset-0"
+          style={{
+            background:
+              "linear-gradient(to bottom, rgba(255,255,255,0) 30%, white 100%)",
+          }}
+        ></div>
+      </div>
 
-      {/* Main background image on top of the tile */}
+      {/* Main Background Image */}
       <div
         className="absolute inset-0 z-10 bg-cover bg-center"
         style={{ backgroundImage: "url('/images/chloromap.png')" }}

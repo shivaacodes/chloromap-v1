@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useState } from "react";
+import { Camera, ScanFace, FileText } from "lucide-react";
 
 function useElementOnScreen(options) {
   const [ref, setRef] = useState(null);
@@ -32,17 +33,17 @@ export default function FeatureSection() {
     {
       id: 1,
       title: "Upload Image",
-      icon: "📷",
+      icon: Camera,
     },
     {
       id: 2,
       title: "Analyze Photo",
-      icon: "🔬",
+      icon: ScanFace,
     },
     {
       id: 3,
-      title: "Generate Summary",
-      icon: "📊",
+      title: "Generate Doc",
+      icon: FileText,
     },
   ];
 
@@ -52,18 +53,18 @@ export default function FeatureSection() {
   });
 
   return (
-    <section className="py-14 bg-white mb-14">
-      <div className="container mx-auto px-4">
+    <section className="py-14 bg-gradient-to-b from-green-50 to-white">
+      <div className="container mx-auto px-6">
         <div className="text-center mb-16">
-          <h2 className="text-6xl font-bold text-green-800 mb-3">Features</h2>
-          <p className="text-2xl text-green-600 max-w-2xl mx-auto font-bold ">
+          <h2 className="text-5xl font-bold mb-3">Features</h2>
+          <p className="text-xl text-green-700 max-w-2xl mx-auto font-semibold">
             Monitor your plant's health in 3 simple steps
           </p>
         </div>
 
         <div
           ref={ref}
-          className="flex flex-col md:flex-row justify-center items-center gap-8 md:gap-16"
+          className="relative flex flex-col md:flex-row justify-center items-center gap-12 md:gap-20"
         >
           {features.map((feature, index) => (
             <FeatureItem
@@ -84,37 +85,47 @@ function FeatureItem({ feature, isVisible, index, isLast }) {
   return (
     <div
       className={`text-center transition-all duration-700 ease-out transform
-        ${isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-12"}
-      `}
+        ${isVisible ? "opacity-100 scale-100" : "opacity-0 scale-90"}`}
       style={{
-        transitionDelay: isVisible ? `${index * 150}ms` : "0ms",
+        transitionDelay: isVisible ? `${index * 200}ms` : "0ms",
       }}
     >
       <div className="relative mb-6">
-        <div className="inline-flex items-center justify-center w-24 h-24 rounded-full bg-green-100 text-green-600 text-4xl hover:scale-110 transition-transform duration-300">
-          {feature.icon}
+        {/* Feature Icon */}
+        <div className="inline-flex items-center justify-center w-24 h-24 rounded-full bg-green-100 text-green-600 text-5xl shadow-lg hover:scale-110 hover:shadow-xl transition-transform duration-300 ease-out">
+          <feature.icon size={48} strokeWidth={1.5} />
         </div>
 
-        {/* Connecting line between features (not for the last item) */}
-        {index < 2 && (
-          <div className="hidden md:block absolute top-1/2 -right-16 w-16 h-0.5 bg-green-200 transform -translate-y-1/2"></div>
+        {/* Connecting Curved Line (for first two items) */}
+        {!isLast && (
+          <svg
+            className="hidden md:block absolute top-1/2 -right-20 w-24 h-12"
+            viewBox="0 0 100 50"
+            fill="none"
+            xmlns="http://www.w3.org/2000/svg"
+          >
+            <path
+              d="M0 25 Q50 -20 100 25"
+              stroke="rgb(167 243 208)"
+              strokeWidth="4"
+              fill="transparent"
+            />
+          </svg>
         )}
 
-        <div
-          className={`absolute -top-2 ${
-            isLast ? "-right-2" : "-right-2"
-          } w-8 h-8 rounded-full bg-green-500 text-white text-sm flex items-center justify-center font-bold`}
-        >
+        <div className="absolute -top-4 right-3 w-9 h-9 rounded-full bg-green-500 text-white text-lg flex items-center justify-center font-semibold shadow-md">
           {feature.id}
         </div>
       </div>
 
+      {/* Feature Title */}
       <h3
-        className={`text-2xl font-bold transition-all duration-700 ease-out transform
-          ${isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-4"}
-        `}
+        className={`text-2xl font-semibold transition-all duration-700 ease-out transform
+          ${
+            isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-4"
+          }`}
         style={{
-          transitionDelay: isVisible ? `${index * 150 + 200}ms` : "0ms",
+          transitionDelay: isVisible ? `${index * 200 + 150}ms` : "0ms",
         }}
       >
         {feature.title}

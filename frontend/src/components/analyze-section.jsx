@@ -8,7 +8,7 @@ import { Button } from "@/components/ui/button";
 
 export default function AnalyzeSection() {
   const [selectedImage, setSelectedImage] = useState(null);
-  const [result, setResult] = useState(null); // Store backend response
+  const [result, setResult] = useState(null);
 
   // Handle file selection
   const handleImageUpload = (event) => {
@@ -44,7 +44,7 @@ export default function AnalyzeSection() {
   };
 
   return (
-    <section className="py-2 bg-green-50 mb-6">
+    <section className="py-2 bg-white mb-6">
       <div className="container mx-auto px-6">
         <h2 className="text-4xl font-semibold text-gray-800 mb-10 text-center">
           Analyze Plant 🌿
@@ -142,6 +142,15 @@ export default function AnalyzeSection() {
                     <p className="text-gray-600 text-sm">
                       Width: {result.result.width}px, Height:{" "}
                       {result.result.height}px
+                    </p>
+                    <p className="text-gray-600 text-sm">
+                      Hue: {result.result.hue} (0-179)
+                    </p>
+                    <p className="text-gray-600 text-sm">
+                      Saturation: {result.result.saturation} (0-255)
+                    </p>
+                    <p className="text-gray-600 text-sm">
+                      Value: {result.result.value} (0-255)
                     </p>
                   </div>
                 )

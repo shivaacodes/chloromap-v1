@@ -2,24 +2,24 @@
 
 export default function Footer() {
   return (
-    <footer className="bg-green-600 text-white py-2">
+    <footer className="text-black py-3">
       <div className="container mx-auto px-6 flex flex-col md:flex-row justify-between items-center gap-4">
-        <div className="flex items-center gap-2">
-          <h3 className="text-xl font-bold text-white">ChloroMap</h3>
-        </div>
+        <h3 className="text-xl font-bold">ChloroMap</h3>
 
-        <span className="relative light text-white px-2 py-1 ">
-          Made by Shiva
+        <span className="px-3 py-1 text-sm font-medium ml-16">
+          Made with ⚡ by Shiva
         </span>
 
         <div className="flex flex-col items-center md:items-end gap-1">
-          <div className="flex gap-3">
-            <span className="text-sm font-medium text-green-100">Flask</span>
-            <span className="text-sm font-medium text-green-100">OpenCV</span>
-            <span className="text-sm font-medium text-green-100">Next.js</span>
+          <div className="flex gap-4 text-sm font-medium">
+            {["Flask", "OpenCV", "Next.js"].map((tech) => (
+              <span key={tech} className="hover:text-green-600 transition">
+                {tech}
+              </span>
+            ))}
           </div>
-          <p className="text-xs text-green-300">
-            © {new Date().getFullYear()} ChloroMap
+          <p className="text-xs text-gray-500">
+            © {new Date().getFullYear()} ChloroMap. All rights reserved.
           </p>
         </div>
       </div>

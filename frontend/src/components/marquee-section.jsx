@@ -16,13 +16,12 @@ export default function MarqueeSection() {
   ];
 
   return (
-    <section className="py-16 bg-gradient-to-r from-green-100 to-blue-50">
-      {/* Heading */}
+    <section className="py-16 bg-gradient-to-b from-white to-green-50">
       <div className="container mx-auto mb-8 text-center">
-        <h2 className="text-4xl font-bold text-green-900 drop-shadow-md">
+        <h2 className="text-5xl font-bold text-black">
           Trusted by Leading Agricultural Organizations
         </h2>
-        <p className="text-lg text-black mt-2">
+        <p className="text-xl text-black mt-4">
           Join thousands of farmers and researchers monitoring plant health with{" "}
           <span className="font-semibold">ChloroMap</span>.
         </p>
@@ -32,9 +31,9 @@ export default function MarqueeSection() {
         {brands.map((brand) => (
           <div
             key={brand.name}
-            className="mx-6 flex items-center gap-4 px-6 py-4 bg-white border border-green-300 shadow-lg rounded-xl transition hover:scale-105"
+            className="mx-6 flex items-center gap-4 px-6 py-4 bg-white border border-green-400 shadow-lg rounded-xl transition hover:scale-105"
           >
-            <Avatar className="w-12 h-12 bg-green-500 text-white">
+            <Avatar className="w-12 h-12 bg-green-600 text-white">
               <AvatarFallback className="text-black">
                 {brand.initials}
               </AvatarFallback>

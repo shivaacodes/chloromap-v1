@@ -41,7 +41,7 @@ export const metadata: Metadata = {
 };
 
 export const viewport = {
-  themeColor: "#2E7D32",
+  themeColor: "#000000",
 };
 
 export default function RootLayout({
@@ -52,7 +52,7 @@ export default function RootLayout({
   return (
     <html lang="en" suppressHydrationWarning>
       <body
-        className={`${poppins.variable} font-poppins antialiased flex flex-col min-h-screen bg-green-50`}
+        className={`${poppins.variable} font-poppins antialiased flex flex-col min-h-screen bg-white`}
       >
         {/* Main content */}
         <main className="flex-grow">{children}</main>
