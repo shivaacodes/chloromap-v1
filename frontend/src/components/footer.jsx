@@ -2,7 +2,7 @@
 
 export default function Footer() {
   return (
-    <footer className="text-black py-3">
+    <footer className="text-black py-3 bg-gradient-to-b from-green-50 to-white">
       <div className="container mx-auto px-6 flex flex-col md:flex-row justify-between items-center gap-4">
         <h3 className="text-xl font-bold">ChloroMap</h3>
 

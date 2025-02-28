@@ -10,7 +10,6 @@ export default function AnalyzeSection() {
   const [selectedImage, setSelectedImage] = useState(null);
   const [result, setResult] = useState(null);
 
-  // Handle file selection
   const handleImageUpload = (event) => {
     const file = event.target.files[0];
     if (file) {
@@ -46,8 +45,8 @@ export default function AnalyzeSection() {
   return (
     <section className="py-2 bg-white mb-6">
       <div className="container mx-auto px-6">
-        <h2 className="text-4xl font-semibold text-gray-800 mb-10 text-center">
-          Analyze Plant 🌿
+        <h2 className="text-5xl font-bold text-black mb-10 text-center">
+          Analyze your Plant
         </h2>
 
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
@@ -98,14 +97,14 @@ export default function AnalyzeSection() {
                       <path d="m16 16-4-4-4 4"></path>
                     </svg>
                   </div>
-                  <h3 className="text-lg font-medium text-gray-700 text-center">
+                  <h3 className="text-lg font-medium text-gray-700 text-center ">
                     Upload Plant Image
                   </h3>
                   <p className="text-gray-500 text-sm text-center max-w-sm mb-6">
                     Upload a clear photo of your plant leaf for analysis
                   </p>
                   <div className="relative">
-                    <Button className="bg-green-400 hover:bg-green-700 text-white px-5 py-2 rounded-xl">
+                    <Button className="bg-green-500 hover:bg-green-700 text-white px-5 py-2 rounded-xl">
                       Select Image
                     </Button>
                     <input
