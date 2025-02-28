@@ -1,10 +1,11 @@
 "use client";
 
 import { useState } from "react";
-import Image from "next/image";
 import axios from "axios";
-import { Card, CardContent } from "@/components/ui/card";
-import { Button } from "@/components/ui/button";
+import { motion } from "framer-motion";
+import UploadCard from "@/components/upload-card";
+import AnalysisCard from "@/components/analysis-card";
+import SummaryCard from "@/components/summary-card";
 
 export default function AnalyzeSection() {
   const [selectedImage, setSelectedImage] = useState(null);
@@ -20,7 +21,6 @@ export default function AnalyzeSection() {
     }
   };
 
-  // Send image to backend
   const handleAnalyze = async () => {
     if (!selectedImage?.file) return;
 
@@ -28,13 +28,13 @@ export default function AnalyzeSection() {
     formData.append("file", selectedImage.file);
 
     try {
+      console.log("Sending request to backend...");
       const response = await axios.post(
         "http://localhost:5000/api/process-image",
         formData,
-        {
-          headers: { "Content-Type": "multipart/form-data" },
-        }
+        { headers: { "Content-Type": "multipart/form-data" } }
       );
+      console.log("Response from backend:", response.data);
       setResult(response.data);
     } catch (error) {
       console.error("Analysis failed:", error);
@@ -43,125 +43,80 @@ export default function AnalyzeSection() {
   };
 
   return (
-    <section className="py-2 bg-white mb-6">
-      <div className="container mx-auto px-6">
-        <h2 className="text-5xl font-bold text-black mb-10 text-center">
+    <section className="py-20 mb-6 relative overflow-hidden">
+      <div className="absolute inset-0 overflow-hidden -z-10">
+        <motion.div
+          className="absolute -bottom-10 -right-10 w-72 h-72 rounded-full bg-gradient-radial from-green-400 to-transparent opacity-40"
+          animate={{ x: [0, -40, 0], y: [0, -30, 0], scale: [1, 1.2, 1] }}
+          transition={{ duration: 12, repeat: Infinity, ease: "easeInOut" }}
+        />
+        <motion.div
+          className="absolute left-10 top-1/3 w-80 h-80 rounded-full bg-gradient-radial from-green-300 to-transparent opacity-40"
+          animate={{ x: [0, 60, 0], y: [0, 40, 0], scale: [1, 1.2, 1] }}
+          transition={{ duration: 10, repeat: Infinity, ease: "easeInOut" }}
+        />
+        <motion.div
+          className="absolute top-0 left-1/4 w-72 h-72 rounded-full bg-gradient-radial from-green-500 to-transparent opacity-30"
+          animate={{ x: [0, 40, 0], y: [0, 50, 0], scale: [1, 1.25, 1] }}
+          transition={{ duration: 8, repeat: Infinity, ease: "easeInOut" }}
+        />
+        <motion.div
+          className="absolute top-20 right-1/4 w-48 h-48 rounded-full bg-gradient-radial from-green-300 to-transparent opacity-40"
+          animate={{ x: [0, -40, 0], y: [0, 35, 0], scale: [1, 1.3, 1] }}
+          transition={{ duration: 7, repeat: Infinity, ease: "easeInOut" }}
+        />
+        <motion.div
+          className="absolute bottom-10 left-1/3 w-56 h-56 rounded-full bg-gradient-radial from-green-600 to-transparent opacity-30"
+          animate={{ x: [0, 35, 0], y: [0, -50, 0], scale: [1, 1.2, 1] }}
+          transition={{ duration: 9, repeat: Infinity, ease: "easeInOut" }}
+        />
+        <motion.div
+          className="absolute top-1/2 right-1/3 w-64 h-64 rounded-full bg-gradient-radial from-emerald-400 to-transparent opacity-30"
+          animate={{ x: [0, -45, 0], y: [0, -30, 0], scale: [1, 1.15, 1] }}
+          transition={{ duration: 11, repeat: Infinity, ease: "easeInOut" }}
+        />
+        <motion.div
+          className="absolute bottom-1/4 right-1/2 w-40 h-40 rounded-full bg-gradient-radial from-lime-500 to-transparent opacity-40"
+          animate={{ x: [0, 25, 0], y: [0, 30, 0], scale: [1, 1.25, 1] }}
+          transition={{ duration: 6, repeat: Infinity, ease: "easeInOut" }}
+        />
+      </div>
+
+      <div className="container mx-auto px-6 relative">
+        <h2 className="text-5xl font-bold text-black mb-10 text-center bg-clip-text">
           Analyze your Plant
         </h2>
-
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
-          {/* Upload Card */}
-          <Card className="border border-gray-300 bg-white border-dashed rounded-2xl hover:shadow-xl transition-shadow">
-            <CardContent className="p-6 flex flex-col items-center justify-center min-h-[400px]">
-              {selectedImage ? (
-                <div className="w-full">
-                  <div className="relative h-60 w-full rounded-xl overflow-hidden mb-4">
-                    <Image
-                      src={selectedImage.preview}
-                      alt="Selected plant"
-                      fill
-                      style={{ objectFit: "cover" }}
-                    />
-                  </div>
-                  <div className="flex gap-2">
-                    <Button
-                      className="w-full bg-green-400 hover:bg-green-700 text-white mt-2 rounded-xl"
-                      onClick={() => setSelectedImage(null)}
-                    >
-                      Change Image
-                    </Button>
-                    <Button
-                      className="w-full bg-green-600 hover:bg-green-800 text-white mt-2 rounded-xl"
-                      onClick={handleAnalyze}
-                    >
-                      Analyze
-                    </Button>
-                  </div>
-                </div>
-              ) : (
-                <>
-                  <div className="mb-6 text-green-500">
-                    <svg
-                      xmlns="http://www.w3.org/2000/svg"
-                      width="40"
-                      height="40"
-                      viewBox="0 0 24 24"
-                      fill="none"
-                      stroke="currentColor"
-                      strokeWidth="1.5"
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                    >
-                      <path d="M4 14.899A7 7 0 1 1 15.71 8h1.79a4.5 4.5 0 0 1 2.5 8.242"></path>
-                      <path d="M12 12v9"></path>
-                      <path d="m16 16-4-4-4 4"></path>
-                    </svg>
-                  </div>
-                  <h3 className="text-lg font-medium text-gray-700 text-center ">
-                    Upload Plant Image
-                  </h3>
-                  <p className="text-gray-500 text-sm text-center max-w-sm mb-6">
-                    Upload a clear photo of your plant leaf for analysis
-                  </p>
-                  <div className="relative">
-                    <Button className="bg-green-500 hover:bg-green-700 text-white px-5 py-2 rounded-xl">
-                      Select Image
-                    </Button>
-                    <input
-                      type="file"
-                      accept="image/*"
-                      onChange={handleImageUpload}
-                      className="absolute inset-0 w-full h-full opacity-0 cursor-pointer"
-                    />
-                  </div>
-                </>
-              )}
-            </CardContent>
-          </Card>
-
-          {/* Analyze Card */}
-          <Card className="border border-gray-300 bg-white rounded-2xl">
-            <CardContent className="p-6 text-center flex flex-col items-center justify-center min-h-[400px]">
-              <h3 className="text-lg font-medium text-gray-700 mb-4">
-                Analysis Result
-              </h3>
-              {result ? (
-                result.error ? (
-                  <p className="text-red-500 text-sm">{result.error}</p>
-                ) : (
-                  <div>
-                    <div className="relative h-60 w-full rounded-xl overflow-hidden mb-4">
-                      <Image
-                        src={`http://localhost:5000/api/processed/${result.result.processed_file}`}
-                        alt="Processed plant"
-                        fill
-                        style={{ objectFit: "cover" }}
-                      />
-                    </div>
-                    <p className="text-gray-600 text-sm">
-                      Width: {result.result.width}px, Height:{" "}
-                      {result.result.height}px
-                    </p>
-                    <p className="text-gray-600 text-sm">
-                      Hue: {result.result.hue} (0-179)
-                    </p>
-                    <p className="text-gray-600 text-sm">
-                      Saturation: {result.result.saturation} (0-255)
-                    </p>
-                    <p className="text-gray-600 text-sm">
-                      Value: {result.result.value} (0-255)
-                    </p>
-                  </div>
-                )
-              ) : (
-                <p className="text-gray-400 text-sm">
-                  Upload an image to analyze
-                </p>
-              )}
-            </CardContent>
-          </Card>
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 mb-8">
+          <UploadCard
+            selectedImage={selectedImage}
+            setSelectedImage={setSelectedImage}
+            handleImageUpload={handleImageUpload}
+            handleAnalyze={handleAnalyze}
+          />
+          <AnalysisCard result={result} />
         </div>
+        <SummaryCard result={result} />
       </div>
+
+      <style jsx global>{`
+        .bg-gradient-radial {
+          background-image: radial-gradient(circle, var(--tw-gradient-stops));
+        }
+        @keyframes pulse {
+          0%,
+          100% {
+            transform: scale(1);
+            opacity: 0.8;
+          }
+          50% {
+            transform: scale(1.05);
+            opacity: 1;
+          }
+        }
+        .pulse-animate {
+          animation: pulse 3s infinite ease-in-out;
+        }
+      `}</style>
     </section>
   );
 }

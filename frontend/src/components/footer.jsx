@@ -7,7 +7,7 @@ export default function Footer() {
         <h3 className="text-xl font-bold">ChloroMap</h3>
 
         <span className="px-3 py-1 text-sm font-medium ml-16">
-          Made with ⚡ by Shiva
+          Developed and Maintained by Shiva Sajay
         </span>
 
         <div className="flex flex-col items-center md:items-end gap-1">
