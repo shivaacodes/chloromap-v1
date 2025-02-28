@@ -83,7 +83,7 @@ export default function AnalyzeSection() {
       </div>
 
       <div className="container mx-auto px-6 relative">
-        <h2 className="text-5xl font-bold text-black mb-10 text-center bg-clip-text">
+        <h2 className="text-5xl font-bold text-black mb-20 text-center bg-clip-text">
           Analyze your Plant
         </h2>
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 mb-8">

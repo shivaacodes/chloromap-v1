@@ -9,40 +9,45 @@ import {
 } from "@/components/ui/navigation-menu";
 import { cn } from "@/lib/utils";
 import Link from "next/link";
+import Image from "next/image";
 
 const Header = () => {
   return (
     <header className="w-full py-6 px-8 flex items-center">
-      <div className="mr-12">
+      <div className="mr-12 flex items-center gap-3">
+        <Image
+          src="/images/chloromap-icon-final.webp"
+          alt="ChloroMap Icon"
+          width={32}
+          height={32}
+          className="w-8 h-8"
+        />
         <Link
           href="/"
-          className="text-2xl font-bold text-green-600 hover:text-green-700 transition-colors"
+          className="text-2xl font-bold text-green-700 hover:text-green-800 transition-colors"
         >
           ChloroMap
         </Link>
       </div>
 
       <NavigationMenu>
-        <NavigationMenuList className="space-x-8">
+        <NavigationMenuList className="space-x-6">
           <NavigationMenuItem>
             <NavigationMenuTrigger className="bg-transparent hover:bg-transparent text-black font-bold text-base hover:text-green-600 transition-colors focus:bg-transparent data-[active]:bg-transparent data-[state=open]:bg-transparent">
               Features
             </NavigationMenuTrigger>
-            <NavigationMenuContent></NavigationMenuContent>
           </NavigationMenuItem>
 
           <NavigationMenuItem>
             <NavigationMenuTrigger className="bg-transparent hover:bg-transparent text-black font-bold text-base hover:text-green-600 transition-colors focus:bg-transparent data-[active]:bg-transparent data-[state=open]:bg-transparent">
-              Analayze
+              Analyze
             </NavigationMenuTrigger>
-            <NavigationMenuContent></NavigationMenuContent>
           </NavigationMenuItem>
 
           <NavigationMenuItem>
             <NavigationMenuTrigger className="bg-transparent hover:bg-transparent text-black font-bold text-base hover:text-green-600 transition-colors focus:bg-transparent data-[active]:bg-transparent data-[state=open]:bg-transparent">
               About
             </NavigationMenuTrigger>
-            <NavigationMenuContent></NavigationMenuContent>
           </NavigationMenuItem>
         </NavigationMenuList>
       </NavigationMenu>
