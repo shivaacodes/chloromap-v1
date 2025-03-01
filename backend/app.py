@@ -4,12 +4,9 @@ from routes import init_routes
 
 app = Flask(__name__)
 CORS(app)
+app.config['UPLOAD_FOLDER'] = '/tmp'  # Temporary local dir for Render
 
-# Configuration
-app.config['UPLOAD_FOLDER'] = 'uploads'
-app.config['PROCESSED_FOLDER'] = 'processed'
-
-init_routes(app)  # Load routes from routes.py
+init_routes(app)
 
 if __name__ == '__main__':
     app.run(debug=True, port=5000)
