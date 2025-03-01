@@ -30,7 +30,7 @@ export default function AnalyzeSection() {
     try {
       console.log("Sending request to backend...");
       const response = await axios.post(
-        "http://localhost:5000/api/process-image",
+        "https://chloromap-v1-backend.onrender.com/api/process-image",
         formData,
         { headers: { "Content-Type": "multipart/form-data" } }
       );
