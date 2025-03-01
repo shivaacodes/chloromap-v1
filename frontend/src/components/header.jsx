@@ -1,7 +1,8 @@
+"use client";
+
 import React from "react";
 import {
   NavigationMenu,
-  NavigationMenuContent,
   NavigationMenuItem,
   NavigationMenuLink,
   NavigationMenuList,
@@ -10,6 +11,7 @@ import {
 import { cn } from "@/lib/utils";
 import Link from "next/link";
 import Image from "next/image";
+import { Menu } from "lucide-react";
 
 const Header = () => {
   return (
@@ -30,27 +32,38 @@ const Header = () => {
         </Link>
       </div>
 
-      <NavigationMenu>
-        <NavigationMenuList className="space-x-6">
-          <NavigationMenuItem>
-            <NavigationMenuTrigger className="bg-transparent hover:bg-transparent text-black font-bold text-base hover:text-green-600 transition-colors focus:bg-transparent data-[active]:bg-transparent data-[state=open]:bg-transparent">
-              Features
-            </NavigationMenuTrigger>
-          </NavigationMenuItem>
+      {/* Desktop Navigation */}
+      <div className="hidden md:block">
+        <NavigationMenu>
+          <NavigationMenuList className="space-x-6">
+            <NavigationMenuItem>
+              <NavigationMenuTrigger className="bg-transparent hover:bg-transparent text-black font-bold text-base hover:text-green-600 transition-colors focus:bg-transparent data-[active]:bg-transparent data-[state=open]:bg-transparent">
+                Features
+              </NavigationMenuTrigger>
+            </NavigationMenuItem>
 
-          <NavigationMenuItem>
-            <NavigationMenuTrigger className="bg-transparent hover:bg-transparent text-black font-bold text-base hover:text-green-600 transition-colors focus:bg-transparent data-[active]:bg-transparent data-[state=open]:bg-transparent">
-              Analyze
-            </NavigationMenuTrigger>
-          </NavigationMenuItem>
+            <NavigationMenuItem>
+              <NavigationMenuTrigger className="bg-transparent hover:bg-transparent text-black font-bold text-base hover:text-green-600 transition-colors focus:bg-transparent data-[active]:bg-transparent data-[state=open]:bg-transparent">
+                Analyze
+              </NavigationMenuTrigger>
+            </NavigationMenuItem>
 
-          <NavigationMenuItem>
-            <NavigationMenuTrigger className="bg-transparent hover:bg-transparent text-black font-bold text-base hover:text-green-600 transition-colors focus:bg-transparent data-[active]:bg-transparent data-[state=open]:bg-transparent">
-              About
-            </NavigationMenuTrigger>
-          </NavigationMenuItem>
-        </NavigationMenuList>
-      </NavigationMenu>
+            <NavigationMenuItem>
+              <NavigationMenuTrigger className="bg-transparent hover:bg-transparent text-black font-bold text-base hover:text-green-600 transition-colors focus:bg-transparent data-[active]:bg-transparent data-[state=open]:bg-transparent">
+                About
+              </NavigationMenuTrigger>
+            </NavigationMenuItem>
+          </NavigationMenuList>
+        </NavigationMenu>
+      </div>
+
+      {/* Mobile Menu Button - Only shown on small screens */}
+      <div className="md:hidden ml-auto">
+        <Menu
+          size={24}
+          className="text-black hover:text-green-600 cursor-pointer"
+        />
+      </div>
     </header>
   );
 };
